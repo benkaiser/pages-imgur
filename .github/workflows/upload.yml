@@ -20,7 +20,7 @@ jobs:
         fileName: 'images/${{ env.FILE_NAME }}'
         encodedString: ${{ env.FILE_CONTENTS }}
     - name: Move File
-      run: mv ${{ steps.write_file.outputs.filePath }} ${{ env.FILE_NAME }}
+      run: mv ${{ steps.write_file.outputs.filePath }} 'images/${{ env.FILE_NAME }}'
     - name: Committing changes
       uses: EndBug/add-and-commit@v7
       with:
