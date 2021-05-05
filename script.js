@@ -90,7 +90,7 @@ class App extends Component {
     setInterval(() => {
       fetch(location + '?cachebust=' + Math.random()).then((response) => {
         if (response.status === 200) {
-          window.location.href = window.location.pathname + location + '?cb=' + Math.floor(Math.random() * 1000);
+          window.location.href = window.location.pathname + location;
         }
       });
     }, 5000);
