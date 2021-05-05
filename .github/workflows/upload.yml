@@ -7,8 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: echo "FILE_NAME= $(jq '.filename' | github.event.client_payload.data)" >> $GITHUB_ENV
-    - run: echo "FILE_CONTENTS= $(jq '.image' | github.event.client_payload.data)" >> $GITHUB_ENV
+    - env:
+        GITHUB_CONTEXT: ${{ github.event.client_payload.data }}
+      run: echo "FILE_NAME= $(jq '.filename' | $GITHUB_CONTEXT)" >> $GITHUB_ENV
+    - env:
+        GITHUB_CONTEXT: ${{ github.event.client_payload.data }}
+      run: echo "FILE_CONTENTS= $(jq '.image' | $GITHUB_CONTEXT)" >> $GITHUB_ENV
     - name: Write File
       id: write_file
       uses: timheuer/base64-to-file@v1

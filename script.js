@@ -44,7 +44,11 @@ class App extends Component {
     const file = event.target.files[0];
     const base64 = await toBase64(file);
     const filename = uuidv4() + '.' + file.type.replace('image/', '');
-    console.log(filename);
+    fetch("https://publicactiontrigger.azurewebsites.net/api/dispatches/benkaiser/pages-imgur", {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify({ event_type: 'Add Image', client_payload: { data: JSON.stringify({ filename, image: base64 }) } })
+    });
   }
 }
 
